@@ -10,7 +10,22 @@ public class Carro extends Thread {
         this.estacionamento = estacionamento;
     }
     
+    @Override
     public void run() {
+        
+        System.out.println("Novo Carro " + this.idCarro);
+        
+        try {
+            
+            sleep((int) (Math.random() * 10) * 1000);
+            if (this.estacionamento.getFuncionario().estacionaCarro(this.estacionamento, this)) {
+                sleep((int) (Math.random() * 10) * 1000);
+                this.estacionamento.getFuncionario().retiraCarro(this.estacionamento, this);
+            }
+            
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         
     }
 

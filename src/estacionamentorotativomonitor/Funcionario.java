@@ -20,12 +20,52 @@ public class Funcionario {
         this.nome = nome;
     }
     
-    public boolean estacionaCarro() {
+    public boolean estacionaCarro(Estacionamento estacionamento, Carro carro) {
+        
+        for (Vaga v : estacionamento.getVagas()) {
+
+            if (v.getCarro() == null) {
+
+                v.setCarro(carro);
+                
+                System.out.println("\nEstacionou o carro: " + carro.getIdCarro()
+                        + " na vaga " + v.getNumero());
+                
+                estacionamento.mostraVagas();
+
+                return true;
+
+            } 
+
+        }
+
+        System.out.println("\nEstacionamento cheio! Carro " + carro.getIdCarro() + " foi embora");
+        
         return false;
+        
     }
     
-    public boolean retiraCarro() {
+    public boolean retiraCarro(Estacionamento estacionamento, Carro carro) {
+        
+        for (Vaga v : estacionamento.getVagas()) {
+
+            if (v.getCarro() != null && v.getCarro().getIdCarro().equals(carro.getIdCarro())) {
+
+                System.out.println("\nRetirou o carro: " + carro.getIdCarro()
+                        + " da vaga " + v.getNumero());
+                
+                v.setCarro(null);
+                        
+                estacionamento.mostraVagas();
+                                   
+                return true;
+
+            }
+            
+        }
+        
         return false;
+        
     }
 
     public boolean isTrabalhando() {

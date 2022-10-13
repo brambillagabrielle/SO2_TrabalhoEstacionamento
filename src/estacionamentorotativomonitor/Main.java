@@ -6,7 +6,13 @@ public class Main {
         
         Funcionario funcionario = new Funcionario("João");
         Estacionamento estacionamento = new Estacionamento(12, funcionario);
-        Carro carro = new Carro("1", estacionamento);
+        
+        for(int i = 1; i <= 30; i++) {
+
+            Carro carro = new Carro(Integer.toString(i), estacionamento);
+            carro.start();
+
+        }
         
     }
     
