@@ -1,5 +1,7 @@
 package estacionamentorotativomonitor;
 
+import java.text.NumberFormat;
+
 public class Funcionario {
     
     private String nome;
@@ -29,6 +31,8 @@ public class Funcionario {
                 
             this.trabalhando = true;
             
+            double tempoInicial = System.currentTimeMillis();
+            
             for (Vaga v : estacionamento.getVagas()) {
 
                 if (v.getCarro() == null) {
@@ -40,6 +44,8 @@ public class Funcionario {
 
                     estacionamento.mostraVagas();
                     
+                    calculaSalario(tempoInicial, System.currentTimeMillis());
+                    
                     this.trabalhando = false;
                     notify();
 
@@ -50,6 +56,8 @@ public class Funcionario {
             }
 
             System.out.println("\nEstacionamento cheio! Carro " + carro.getIdCarro() + " foi embora");
+            
+            calculaSalario(tempoInicial, System.currentTimeMillis());
             
             this.trabalhando = false;
             notify();
@@ -70,6 +78,8 @@ public class Funcionario {
                 wait();
 
             this.trabalhando = true;
+            
+            double tempoInicial = System.currentTimeMillis();
         
             for (Vaga v : estacionamento.getVagas()) {
 
@@ -82,6 +92,8 @@ public class Funcionario {
 
                     estacionamento.mostraVagas();
                     
+                    calculaSalario(tempoInicial, System.currentTimeMillis());
+                    
                     this.trabalhando = false;
                         notify();
 
@@ -91,6 +103,8 @@ public class Funcionario {
 
             }
             
+            calculaSalario(tempoInicial, System.currentTimeMillis());
+            
             this.trabalhando = false;
             notify();
             
@@ -99,6 +113,16 @@ public class Funcionario {
         }
         
         return false;
+        
+    }
+    
+    private void calculaSalario(double tempoInicial, double tempoFinal) {
+        
+        NumberFormat dinheiro = NumberFormat.getCurrencyInstance();
+        
+        this.salario += (tempoFinal - tempoInicial) / 10;
+        
+        System.out.println("Salário atual do " + this.nome + ": " + dinheiro.format(this.salario));
         
     }
 
