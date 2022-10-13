@@ -19,6 +19,14 @@ public class Funcionario {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+    public boolean estacionaCarro() {
+        return false;
+    }
+    
+    public boolean retiraCarro() {
+        return false;
+    }
 
     public boolean isTrabalhando() {
         return trabalhando;

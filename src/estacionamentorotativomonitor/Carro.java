@@ -1,6 +1,6 @@
 package estacionamentorotativomonitor;
 
-public class Carro {
+public class Carro extends Thread {
     
     private String idCarro;
     private Estacionamento estacionamento;
@@ -8,6 +8,10 @@ public class Carro {
     public Carro(String idCarro, Estacionamento estacionamento) {
         this.idCarro = idCarro;
         this.estacionamento = estacionamento;
+    }
+    
+    public void run() {
+        
     }
 
     public String getIdCarro() {
